@@ -11,24 +11,28 @@ Usage
 >>> vm_mngr = cf_cli.vms
 
 Get all VMs -
+
 ```
 >>> vm_mngr.get_all()
 ...
 ```
 
 Get all VMs expanding VM details -
+
 ```
 >>> vm_mngr.get_all(expand=True)
 ...
 ```
 
 Get VM by name -
+
 ```
 >>> vm_mngr.get_by_name('globnpolvmm01')
 ...
 ```
 
 get VM by ID -
+
 ```
 >>> vm_mngr.get_by_id('globnpolvmm01')
 ...
