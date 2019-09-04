@@ -9,30 +9,27 @@ Usage
 >>> cf_cli = cloudformscli.Client("https://<cf host>/api", "admin", "smartvm")
 >>> cf_cli = cloudformscli.Client("https://localhost:8443/api", "admin", "smartvm")
 >>> vm_mngr = cf_cli.vms
+```
 
 Get all VMs -
-
 ```
 >>> vm_mngr.get_all()
 ...
 ```
 
 Get all VMs expanding VM details -
-
 ```
 >>> vm_mngr.get_all(expand=True)
 ...
 ```
 
 Get VM by name -
-
 ```
 >>> vm_mngr.get_by_name('globnpolvmm01')
 ...
 ```
 
-get VM by ID -
-
+Get VM by ID -
 ```
 >>> vm_mngr.get_by_id('globnpolvmm01')
 ...
