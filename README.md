@@ -60,6 +60,7 @@ All generic objects manager across all gen obj definition types -
 ...
 >>> go_mngr.get_by_id('301000000000247')
 ...
+```
 
 Generic Object manager for a specific definition type -
 ```
