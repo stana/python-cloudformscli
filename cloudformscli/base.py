@@ -61,9 +61,9 @@ class BaseManager(object):
         return resource['id']
 
     def action(self, action_name, id, data={}, params={}):
-        rel_url = "%s/%s" % (self._get_id_url(id), action_name)
+        resource_url = self._get_id_url(id)
         data.update({'action': action_name})
-        return self._conn.post(rel_url, data, params)
+        return self._conn.post(resource_url, data, params)
 
     #def delete(self, id):
     #    return self._conn.delete(self._get_id_url(id))

@@ -6,7 +6,10 @@ from cloudformscli import exception
 
 
 class Client(object):
-    def __init__(self, base_uri, username, password, verify_cert=False):
+    def __init__(self, cf_host, username, password, port=None, verify_cert=False):
+        base_uri = 'https://%s/api' % cf_host
+        if port:
+            base_uri = 'https://%s:%s/api' % (cf_host, port)
         self._conn = connection.Connection(
             base_uri, username, password, verify_cert)
 

@@ -6,8 +6,7 @@ Usage
 
 ```
 >>> import cloudformscli 
->>> cf_cli = cloudformscli.Client("https://<cf host>/api", "admin", "smartvm")
->>> cf_cli = cloudformscli.Client("https://localhost:8443/api", "admin", "smartvm")
+>>> cf_cli = cloudformscli.Client("mycfme01", "admin", "smartvm")
 >>> vm_mngr = cf_cli.vms
 ```
 
