@@ -33,12 +33,6 @@ class BaseManager(object):
         id_url = self._get_id_url(id)
         try:
             resource = self._conn.get(id_url)
-            if hasattr(self, 'gen_obj_def'):
-                # resource is a gen obj, filter on type
-                if resource['generic_object_definition_id'] != self.gen_obj_def['id']:
-                    # gen obj found is not of correct type
-                    raise exception.ObjectNotFoundException(
-                        "No resource found with id - %s and `OvmVm` type" % id)
             return resource
         except exception.CloudFormsClientRequestException as req_exc:
             if req_exc.http_status_code == 404:
@@ -66,7 +60,7 @@ class BaseManager(object):
         resource = self.get_by_name(name)
         return resource['id']
 
-    def action(self, id, action_name, data={}, params={}):
+    def action(self, action_name, id, data={}, params={}):
         rel_url = "%s/%s" % (self._get_id_url(id), action_name)
         data.update({'action': action_name})
         return self._conn.post(rel_url, data, params)

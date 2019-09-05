@@ -91,6 +91,7 @@ class GenericObjectManager(base.BaseManager):
     passing in gen obj definition name.
     """
     def __init__(self, conn, gen_obj_def_name=None):
+        self.gen_obj_def_name = gen_obj_def_name
         if gen_obj_def_name:
             base_params = {'filter[]': 'generic_object_definition_name=%s'
                 % gen_obj_def_name}
@@ -107,3 +108,17 @@ class GenericObjectManager(base.BaseManager):
             # type objects (not disk or nic gen objects).
             gen_obj_def_mngr = GenericObjectDefManager(conn)
             self.gen_obj_def = gen_obj_def_mngr.get_by_name(gen_obj_def_name)
+
+    def get_by_id(self, id):
+        # override here to also check if found resource is of correct
+        # generic object definition (if gen obj def specified
+        gen_obj = super(GenericObjectManager, self).get_by_id(id)
+        if self.gen_obj_def:
+            # Specific gen obj definition specified. Filter on it
+            # as returned resource might not be of correct type.
+            if gen_obj['generic_object_definition_id'] != self.gen_obj_def['id']:
+                # gen obj found is not of correct type
+                raise exception.ObjectNotFoundException(
+                    "No generic object found with id - `%s` and `%s` type" %
+                        (id, self.gen_obj_def_name))
+        return gen_obj
